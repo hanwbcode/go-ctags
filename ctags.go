@@ -16,16 +16,16 @@ import (
 )
 
 type Entry struct {
-	Name       string
-	Path       string
-	Line       int
-	Kind       string
-	Language   string
-	Parent     string
-	ParentKind string
-	Pattern    string
-	Signature  string
-
+	Name        string
+	Path        string
+	Line        int
+	Kind        string
+	Language    string
+	Parent      string
+	ParentKind  string
+	Pattern     string
+	Signature   string
+	End         int
 	FileLimited bool
 }
 
@@ -267,6 +267,7 @@ func (p *ctagsProcess) Parse(name string, content []byte) ([]*Entry, error) {
 				ParentKind: rep.ScopeKind,
 				Pattern:    rep.Pattern,
 				Signature:  rep.Signature,
+				End:        rep.End,
 			})
 		default:
 			return nil, fmt.Errorf("ctags unexpected response %s for %s", rep.Typ, name)
